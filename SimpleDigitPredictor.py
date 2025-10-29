@@ -22,3 +22,21 @@ model.compile(optimizer='adam',
 
 # Train the model
 model.fit(x_train, y_train, epochs=5)
+
+# Evaluate the model
+test_loss, test_acc = model.evaluate(x_test, y_test, verbose=2)
+print(f"\nTest accuracy: {test_acc:.4f}")
+
+# Make predictions
+predictions = model.predict(x_test)
+
+# Plot a few test images with predictions
+plt.figure(figsize=(10, 5))
+for i in range(10):
+    plt.subplot(2, 5, i + 1)
+    plt.imshow(x_test[i], cmap='gray')
+    plt.title(f"Pred: {tf.argmax(predictions[i]).numpy()}\nTrue: {y_test[i]}")
+    plt.axis('off')
+
+plt.tight_layout()
+plt.show()
